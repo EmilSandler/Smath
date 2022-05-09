@@ -48,7 +48,9 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
           if (nextCell.cellType == CellType.food) {
             if(prob.x + prob.y == nextCell.prob.x + nextCell.prob.y) {
               Score.score++;
+              gameRef.scoreTextComponent.text = "Score: ${Score.score}";
               prob = prob.initProblems();
+              gameRef.problemTextComponent.text = "Problem: ${prob.x} + ${prob.y}";
               _snake.grow(nextCell);
               _grid.clearFood();
               _grid.generateFood(prob);
@@ -79,9 +81,6 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
           Rect.fromLTRB(2, 2, gameRef.canvasSize.x - 2, gameRef.canvasSize.y - 2),
           Styles.gameOver);
     }
-    Vector2 middle = Vector2(0, 0);
-    Score.render(canvas, middle);
-
   }
 
   void onTapUp(TapUpInfo info) {

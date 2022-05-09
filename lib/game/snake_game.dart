@@ -5,7 +5,7 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_flame_snake/game/component/score.dart';
+
 import 'package:flutter_flame_snake/game/component/world.dart';
 
 import 'component/background.dart';
@@ -19,6 +19,8 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
   World? world;
   OffSets offSets = OffSets(Vector2.zero());
   Problems problem = Problems().initProblems();
+  TextComponent scoreTextComponent = TextComponent();
+  TextComponent problemTextComponent = TextComponent();
 
   @override
   Future<void> onLoad() async {
@@ -32,6 +34,11 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
 
     grid.generateFood(problem);
 
+    scoreTextComponent = TextComponent(text:'Score: 0', position: Vector2(10,10), anchor: Anchor.topLeft);
+    problemTextComponent = TextComponent(text:"Problem: ${problem.x} + ${problem.y}", position: Vector2(500,10), anchor: Anchor.topRight);
+
+    add(scoreTextComponent);
+    add(problemTextComponent);
     world = World(grid);
     world?.prob = problem;
     add(world!);
