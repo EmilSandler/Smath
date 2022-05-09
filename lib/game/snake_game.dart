@@ -25,7 +25,8 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
+    //double maxSide = min(size.x, size.y);
+    //camera.viewport = FixedResolutionViewport(Vector2.all(maxSide));
     offSets = OffSets(canvasSize);
 
     add(BackGround(GameConfig.cellSize));

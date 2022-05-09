@@ -57,6 +57,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
             }
             else{
               if(_snake.removeOne(_grid)) {
+                gameRef.camera.shake(intensity: 1.5);
                 _grid.clearFood();
                 _grid.generateFood(prob);
               }
