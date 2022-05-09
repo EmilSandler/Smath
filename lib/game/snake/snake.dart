@@ -67,6 +67,9 @@ class Snake {
   }
 
   bool removeOne(Grid grid) {
+    if(snakeBody.length == 1){
+      return false;
+    }
     grid.cells[snakeBody.last.cell.row][snakeBody.last.cell.column].cellType = CellType.empty;
     return snakeBody.remove(snakeBody.last);
   }
