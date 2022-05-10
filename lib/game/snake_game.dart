@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_flame_snake/game/component/world.dart';
+import 'package:flutter_flame_snake/screens/game_over_menu.dart';
 
 import 'component/background.dart';
 import 'component/problems.dart';
@@ -22,7 +23,6 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
   Problems problem = Problems().initProblems();
   TextComponent scoreTextComponent = TextComponent();
   TextComponent problemTextComponent = TextComponent();
-
   @override
   Future<void> onLoad() async {
     await super.onLoad();
@@ -52,21 +52,19 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
     world!.onTapUp(info);
   }
 
+
   @override
-  KeyEventResult onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed,) {
-    final isKeyDown = event is RawKeyDownEvent;
-    final isSpace = keysPressed.contains(LogicalKeyboardKey.arrowUp);
-    if (keysPressed.contains(LogicalKeyboardKey.arrowUp) && isKeyDown) {
-      world!.onPress(Vector2(0, 18));
-      print(4321);
+  void update(double dt) {
+    // TODO: implement update
+    super.update(dt);
 
+    if(world?.gameOver == true) {
+      pauseEngine();
+      overlays.add(GameOverMenu.ID);
     }
-    else if (keysPressed.contains(LogicalKeyboardKey.arrowRight) && isKeyDown) {
-      world!.onPress(Vector2(30, 0));
-      print(1234);
+  }
 
-    }
-      return KeyEventResult.handled;
+  void reset() {
 
   }
 
