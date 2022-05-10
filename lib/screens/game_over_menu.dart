@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flame_snake/game/snake_game.dart';
+import 'package:flutter_flame_snake/screens/game_play.dart';
 
 
 import '../../screens/main_menu.dart';
@@ -45,7 +46,12 @@ class GameOverMenu extends StatelessWidget {
                 gameRef.overlays.remove(GameOverMenu.ID);
                 gameRef.overlays.add(GameOverMenu.ID);
                 gameRef.reset();
-
+                gameRef.resumeEngine();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const GamePlay(),
+                  ),
+                );
               },
               child: Text('Restart'),
             ),

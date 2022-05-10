@@ -15,9 +15,10 @@ class GamePlay extends StatelessWidget{
       body: WillPopScope(
         onWillPop: () async =>false,
         child: GameWidget(
-          game: _sneakGame,
+          game: SnakeGame(),
           overlayBuilderMap: {
             GameOverMenu.ID: (BuildContext context, SnakeGame gameRef) => GameOverMenu(gameRef: gameRef),
+
           },
         ),
       ),
