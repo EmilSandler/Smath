@@ -21,7 +21,7 @@ class GameConfig {
   static const fps = 5.0;
 
   // Food radius offset, the empty space in the cell
-  static const foodRadius = 5.0;
+  static const foodRadius = 2.0;
 
   // Snake is composed of bunch of squares and this config defines the thickness of the lines
   static const snakeLineThickness = 4.0;
