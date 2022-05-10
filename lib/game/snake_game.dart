@@ -64,9 +64,7 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
     }
   }
 
-  void reset() {
 
-  }
 
 
 }

@@ -45,7 +45,6 @@ class GameOverMenu extends StatelessWidget {
               onPressed: () {
                 gameRef.overlays.remove(GameOverMenu.ID);
                 gameRef.overlays.add(GameOverMenu.ID);
-                gameRef.reset();
                 gameRef.resumeEngine();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
@@ -63,8 +62,6 @@ class GameOverMenu extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 gameRef.overlays.remove(GameOverMenu.ID);
-                gameRef.reset();
-
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => const MainMenu(),
