@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'dart:math';
 
 import 'package:flame/components.dart';
@@ -27,8 +28,8 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
     await super.onLoad();
     //double maxSide = min(size.x, size.y);
     //camera.viewport = FixedResolutionViewport(Vector2.all(maxSide));
-    offSets = OffSets(canvasSize);
 
+    offSets = OffSets(canvasSize);
     add(BackGround(GameConfig.cellSize));
     // ignore: avoid_function_literals_in_foreach_calls
     grid.cells.forEach((rows) => rows.forEach((cell) => add(cell)));
@@ -36,7 +37,7 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
     grid.generateFood(problem);
 
     scoreTextComponent = TextComponent(text:'Score: 0', position: Vector2(10,10), anchor: Anchor.topLeft);
-    problemTextComponent = TextComponent(text:"Problem: ${problem.x} + ${problem.y}", position: Vector2(500,10), anchor: Anchor.topRight);
+    problemTextComponent = TextComponent(text:"Problem: ${problem.x} + ${problem.y}", position: Vector2(canvasSize.x / 2, 50), anchor: Anchor.center);
 
     add(scoreTextComponent);
     add(problemTextComponent);
