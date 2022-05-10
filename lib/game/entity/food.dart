@@ -2,19 +2,34 @@
 
 import 'dart:ui';
 import 'dart:ui' hide TextStyle, TextDirection;
+import 'package:flame/assets.dart';
 import 'package:flame/components.dart';
+import 'package:flame/flame.dart';
+import 'package:flame/palette.dart';
 import 'package:flutter_flame_snake/game/config/game_config.dart';
 import 'package:flutter_flame_snake/game/config/styles.dart';
 
 class Food {
   static TextPaint paint = TextPaint();
+  static late Sprite appleSprite;
+  static Images images = Flame.images;
+  static bool isImageLoaded = false;
 
+  Future<void> onload() async {
+    images.load('apple.png');
+    appleSprite = Sprite(images.fromCache('apple.png'));
+  }
 
-
-  static void render(Canvas canvas, Vector2 location, int cellSize, int sum) {
-    canvas.drawCircle(
-        findMiddle(location, cellSize), findRadius(cellSize), Styles.red);
-    Vector2 textLocation = Vector2(location.x + 8, location.y + 3.8);
+  static Future<void> render(Canvas canvas, Vector2 location, int cellSize, int sum)  async {
+    // canvas.drawCircle(
+    //     findMiddle(location, cellSize), findRadius(cellSize), Styles.red);
+    if (!isImageLoaded) {
+      await images.load('apple.png');
+      isImageLoaded = true;
+    }
+    appleSprite = Sprite(images.fromCache('apple.png'));
+    appleSprite.render(canvas, position: location, size: Vector2(cellSize.toDouble(), cellSize.toDouble()));
+    Vector2 textLocation = Vector2(location.x + (sum.toString().length == 1 ? 10 : 5), location.y + 4.5);
 
     paint.render(canvas, sum.toString(), textLocation);
   }
