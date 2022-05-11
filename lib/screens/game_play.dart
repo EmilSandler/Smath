@@ -12,16 +12,24 @@ class GamePlay extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WillPopScope(
-        onWillPop: () async =>false,
-        child: GameWidget(
-          game: SnakeGame(),
-          overlayBuilderMap: {
-            GameOverMenu.ID: (BuildContext context, SnakeGame gameRef) => GameOverMenu(gameRef: gameRef),
-
-          },
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(
+                  "https://i.ibb.co/sjQTp4s/eden-Garden.png"),
+              fit: BoxFit.fill
+          ),
         ),
-      ),
+        child: WillPopScope(
+          onWillPop: () async =>false,
+          child: GameWidget(
+            game: SnakeGame(),
+            overlayBuilderMap: {
+              GameOverMenu.ID: (BuildContext context, SnakeGame gameRef) => GameOverMenu(gameRef: gameRef),
+            },
+          ),
+        ),
+    ),
     );
   }
   
