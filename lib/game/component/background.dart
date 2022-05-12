@@ -51,7 +51,7 @@ class BackGround extends PositionComponent with HasGameRef<SnakeGame> {
         if (row % 2 == (col % 2 == 0 ? 0 : 1)) {
           c.drawRect(
               Rect.fromPoints(Offset(x, y), Offset(x + cellSize, y + cellSize)),
-              Styles.boardBackgroundDark);
+              Styles.white);
         }
       }
     }

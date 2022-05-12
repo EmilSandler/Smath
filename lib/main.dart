@@ -22,7 +22,7 @@ void main() {
           title: Text("Flutter Background Image - FlutterCorner"),
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
                   "https://i.ibb.co/sjQTp4s/eden-Garden.png"),
