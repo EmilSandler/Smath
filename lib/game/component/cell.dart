@@ -3,10 +3,12 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flutter_flame_snake/game/component/problems.dart';
 import 'package:flutter_flame_snake/game/component/score.dart';
+import 'package:flutter_flame_snake/game/snake/snake_body_part.dart';
 import 'package:flutter_flame_snake/game/snake_game.dart';
 
 import '../entity/food.dart';
 import '../entity/snake_body.dart';
+import '../config/snake_config.dart';
 
 enum CellType { empty, snakeBody, food }
 
@@ -17,6 +19,7 @@ class Cell extends PositionComponent with HasGameRef<SnakeGame> {
   final Vector2 _index;
   final int _cellSize;
   CellType cellType;
+  BodyType bodyType = BodyType.empty;
   Vector2 _location = Vector2.zero();
   Problems prob = Problems();
 
@@ -44,7 +47,7 @@ class Cell extends PositionComponent with HasGameRef<SnakeGame> {
     // TODO get rid of switch by making the cell type an object and directly call render on it.
     switch (cellType) {
       case CellType.snakeBody:
-        SnakeBody.render(canvas, _location, _cellSize);
+        SnakeBody.render(canvas, _location, _cellSize, bodyType);
         break;
       case CellType.food:
         Food.render(canvas, _location, _cellSize, prob.x+prob.y);

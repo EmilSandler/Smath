@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/input.dart';
 import 'package:flutter_flame_snake/game/component/problems.dart';
 import 'package:flutter_flame_snake/game/component/score.dart';
@@ -82,6 +83,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
           Rect.fromLTRB(2, 2, gameRef.canvasSize.x - 2, gameRef.canvasSize.y - 2),
           Styles.gameOver);
     }
+    _snake.setBodyType();
   }
 
   void onTapUp(TapUpInfo info) {
@@ -96,6 +98,8 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
   }
 
   void _initializeSnake() {
+    Flame.images.loadAll(['apple.png',
+                          'snake-graphics.png']);
     var headIndex = GameConfig.headIndex;
     var snakeLength = GameConfig.initialSnakeLength;
 

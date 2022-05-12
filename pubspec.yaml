@@ -65,7 +65,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/apple.png
-
+    - assets/images/snake-graphics.png
   fonts:
     - family: SnakeChan
       fonts:

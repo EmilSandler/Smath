@@ -8,9 +8,9 @@ void main() {
   runApp(
     MaterialApp(
       themeMode: ThemeMode.dark,
-      darkTheme: ThemeData.dark().copyWith(
-        textTheme: GoogleFonts.bungeeInlineTextTheme(),
-        scaffoldBackgroundColor: Colors.black
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+        fontFamily: 'SnakeChan'
       ),
       home: const MainMenu(),
     )

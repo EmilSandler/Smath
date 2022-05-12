@@ -23,6 +23,7 @@ class SnakeGame extends FlameGame with TapDetector, KeyboardEvents{
   Problems problem = Problems().initProblems();
   TextComponent scoreTextComponent = TextComponent();
   TextComponent problemTextComponent = TextComponent();
+
   @override
   Future<void> onLoad() async {
     await super.onLoad();

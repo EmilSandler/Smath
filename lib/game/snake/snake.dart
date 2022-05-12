@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:flame/components.dart';
 import 'package:flutter_flame_snake/game/component/cell.dart';
 import 'package:flutter_flame_snake/game/snake/snake_body_part.dart';
+import '../config/snake_config.dart';
 
 import 'grid.dart';
 
@@ -20,11 +21,13 @@ class Snake {
     _removeLast();
     head = nextCell;
     _addFirst(head);
+    setBodyType();
   }
 
   void grow(Cell nextCell) {
     head = nextCell;
     _addFirst(head);
+    setBodyType();
   }
 
   bool checkCrash(Cell nextCell) {
@@ -74,5 +77,40 @@ class Snake {
     return snakeBody.remove(snakeBody.last);
   }
 
-
+  void setBodyType() {
+    Cell? prevCell;
+    for (SnakeBodyPart part in snakeBody) {
+      if (part == snakeBody.first) {
+        part.type = BodyType.head_top;
+      }
+      else {
+        if (part == snakeBody.last) {
+          if (part.previous != null) {
+            prevCell = part.previous?.cell;
+          }
+          if (prevCell != null &&
+              part.cell.location.x == prevCell.location.x) {
+            if (part.cell.location.y > prevCell.location.y) {
+              part.type = BodyType.tail_bottom;
+            }
+            else {
+              part.type = BodyType.tail_top;
+            }
+          }
+          else {
+            if (prevCell != null &&
+                part.cell.location.x > prevCell.location.x) {
+              part.type = BodyType.tail_left;
+            }
+            else {
+              part.type = BodyType.tail_right;
+            }
+          }
+        }
+        else {
+          part.type = BodyType.left_right;
+        }
+      }
+  }
+  }
 }
