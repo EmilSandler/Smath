@@ -19,7 +19,7 @@ class Cell extends PositionComponent with HasGameRef<SnakeGame> {
   final Vector2 _index;
   final int _cellSize;
   CellType cellType;
-  BodyType bodyType = BodyType.empty;
+  BodyType bodyType = BodyType.left_right;
   Vector2 _location = Vector2.zero();
   Problems prob = Problems();
 

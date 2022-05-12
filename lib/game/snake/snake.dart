@@ -21,13 +21,11 @@ class Snake {
     _removeLast();
     head = nextCell;
     _addFirst(head);
-    setBodyType();
   }
 
   void grow(Cell nextCell) {
     head = nextCell;
     _addFirst(head);
-    setBodyType();
   }
 
   bool checkCrash(Cell nextCell) {
@@ -70,47 +68,84 @@ class Snake {
   }
 
   bool removeOne(Grid grid) {
-    if(snakeBody.length == 1){
+    if (snakeBody.length == 1) {
       return false;
     }
-    grid.cells[snakeBody.last.cell.row][snakeBody.last.cell.column].cellType = CellType.empty;
+    grid.cells[snakeBody.last.cell.row][snakeBody.last.cell.column].cellType =
+        CellType.empty;
     return snakeBody.remove(snakeBody.last);
   }
 
-  void setBodyType() {
+  void setBodyType(Cell nextCell) {
     Cell? prevCell;
     for (SnakeBodyPart part in snakeBody) {
       if (part == snakeBody.first) {
-        part.type = BodyType.head_top;
-      }
-      else {
+        if (nextCell.size == 0) {
+          continue;
+        }
+        if (part.cell.location.x > nextCell.location.x) {
+          part.cell.bodyType = BodyType.head_left;
+        }
+        else if (part.cell.location.x < nextCell.location.x) {
+          part.cell.bodyType = BodyType.head_right;
+        }
+        else if (part.cell.location.y > nextCell.location.y) {
+          part.cell.bodyType = BodyType.head_top;
+        }
+        else if (part.cell.location.y < nextCell.location.y) {
+          part.cell.bodyType = BodyType.head_bottom;
+        }
+      } else {
+        if (part.previous != null) {
+          prevCell = part.previous?.cell;
+        }
         if (part == snakeBody.last) {
-          if (part.previous != null) {
-            prevCell = part.previous?.cell;
-          }
-          if (prevCell != null &&
-              part.cell.location.x == prevCell.location.x) {
+          if (prevCell != null && part.cell.location.x == prevCell.location.x) {
             if (part.cell.location.y > prevCell.location.y) {
-              part.type = BodyType.tail_bottom;
+              part.cell.bodyType = BodyType.tail_bottom;
+            } else {
+              part.cell.bodyType = BodyType.tail_top;
             }
-            else {
-              part.type = BodyType.tail_top;
-            }
-          }
-          else {
+          } else {
             if (prevCell != null &&
                 part.cell.location.x > prevCell.location.x) {
-              part.type = BodyType.tail_left;
+              part.cell.bodyType = BodyType.tail_right;
+            } else {
+              part.cell.bodyType = BodyType.tail_left;
+            }
+          }
+        } else {
+          Cell? nextCell = part.next?.cell;
+          if (prevCell != null && nextCell != null) {
+            if (part.cell.location.x > prevCell.location.x &&
+                part.cell.location.y > nextCell.location.y) {
+              part.cell.bodyType = BodyType.top_left;
+            }
+            else if (part.cell.location.x > prevCell.location.x &&
+                part.cell.location.y < nextCell.location.y) {
+              part.cell.bodyType = BodyType.bottom_left; //good
+            }
+            else if (part.cell.location.x < prevCell.location.x &&
+                part.cell.location.y > nextCell.location.y) {
+              part.cell.bodyType = BodyType.top_right; //good
+            }
+            else if (part.cell.location.x < prevCell.location.x &&
+                part.cell.location.y < nextCell.location.y) {
+              part.cell.bodyType = BodyType.bottom_right;
             }
             else {
-              part.type = BodyType.tail_right;
+              if (prevCell != null &&
+                  part.cell.location.x == prevCell.location.x) {
+                part.cell.bodyType = BodyType.top_bottom;
+              }
+              else if (prevCell != null &&
+                  part.cell.location.y == prevCell.location.y) {
+                part.cell.bodyType = BodyType.left_right;
+              }
             }
           }
         }
-        else {
-          part.type = BodyType.left_right;
-        }
       }
-  }
+    }
   }
 }

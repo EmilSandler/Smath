@@ -70,9 +70,12 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
             _snake.move(nextCell);
           }
         }
+        _snake.setBodyType(_getNextCell());
       } else {
         gameOver = true;
+        _snake.setBodyType(Cell(Vector2.all(-1), 0));
       }
+
     }
   }
 
@@ -83,7 +86,7 @@ class World extends DynamicFpsPositionComponent with HasGameRef<SnakeGame> {
           Rect.fromLTRB(2, 2, gameRef.canvasSize.x - 2, gameRef.canvasSize.y - 2),
           Styles.gameOver);
     }
-    _snake.setBodyType();
+    // _snake.setBodyType(_getNextCell());
   }
 
   void onTapUp(TapUpInfo info) {

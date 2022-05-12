@@ -26,7 +26,7 @@ class SnakeConfig {
     Vector2(1, 3),
     Vector2(1, 4),
     Vector2(0, 1),
-    Vector2(0, 2),
+    Vector2(1, 2),
     Vector2(2, 2),
     Vector2(1, 0),
     Vector2(0, 2),

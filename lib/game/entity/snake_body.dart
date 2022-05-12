@@ -22,12 +22,8 @@ class SnakeBody {
       snakeSpriteSheet = SpriteSheet(image: await images.load('snake-graphics.png'), srcSize: Vector2.all(64.0));
       isSpriteSheetLoaded = true;
     }
-    snakeSpriteSheet.getSprite(SnakeConfig.snakeConfig[bodyType.index].x as int, SnakeConfig.snakeConfig[bodyType.index].y as int).render(canvas, position: location, size: Vector2.all(cellSize as double));
-    // canvas.drawImage(snakeSpriteSheet.getSprite(0, 2).image, Offset(location.x, location.y),/* findEnd(location, cellSize),*/ BasicPalette.white.paint());
-    // canvas.drawRect(
-    //     Rect.fromPoints(
-    //         findStart(location, cellSize), findEnd(location, cellSize)),
-    //     Styles.snakeBody);
+    snakeSpriteSheet.getSprite(SnakeConfig.snakeConfig[bodyType.index].x as int, SnakeConfig.snakeConfig[bodyType.index].y as int)
+        .render(canvas, position: location, size: Vector2.all(cellSize as double));
   }
 
   static Offset findStart(Vector2 location, int cellSize) {
